@@ -1,3 +1,18 @@
+.weather-select-button.selected,
+.weather-select-button.selected:hover {
+  background-color: gray;
+}
+
+.weather-selector {
+  width: 16px;
+  height: 16px;
+}
+
+.weather-indicator {
+  width: 200px;
+  padding-left: 2em;
+}
+
 .wearher-wind-wrap {
   position: relative;
   width: 34px;
