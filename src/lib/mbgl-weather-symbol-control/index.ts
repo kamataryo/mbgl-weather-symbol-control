@@ -112,6 +112,7 @@ export class WeatherSymbolControl {
   onAdd(map: mapboxgl.Map) {
     map.on("click", this.onMapClick(map));
     map.on("mousemove", this.onMapMouseMove);
+    map.on("touchmove", this.onMapMouseMove);
     // map.on("keydown", this.onMapKeyDown);
     return this.container;
   }
