@@ -1,0 +1,45 @@
+{
+  "name": "@kamataryo/mbgl-weather-symbol-control",
+  "description": "Japanese weather symbol control for mapboxgl-js.",
+  "version": "0.0.1",
+  "dependencies": {
+
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:ci": "react-scripts test --watchAll=false",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.7",
+    "@types/mapbox-gl": "^0.54.1",
+    "@types/styled-components": "^4.1.18",
+    "@types/jest": "24.0.17",
+    "@types/node": "12.6.9",
+    "@types/react": "16.8.24",
+    "@types/react-dom": "16.8.5",
+    "mapbox-gl": "^1.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "styled-components": "^4.3.2",
+    "typescript": "3.5.3"
+  }
+}
