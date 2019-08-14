@@ -10,7 +10,6 @@
 
 .weather-indicator {
   width: 200px;
-  padding-left: 2em;
 }
 
 .wearher-wind-wrap {
@@ -26,6 +25,13 @@
   left: -17px;
   width: 34px;
   height: 34px;
+}
+
+.weather-subscript {
+  position: absolute;
+  right: -34px;
+  z-index: 2;
+  font-size: 16px;
 }
 
 .wind {
