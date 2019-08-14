@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { WeatherSymbolControl } from "../lib/mbgl-weather-symbol-control";
 
 export const Map: React.FC = () => {
   const [map, setMap] = useState<mapboxgl.Map | null>(null);
@@ -19,6 +20,7 @@ export const Map: React.FC = () => {
       });
 
       map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(new WeatherSymbolControl());
       setMap(map);
     }
   }, [map]);

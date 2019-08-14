@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
+    <title>sunny</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-99.000000, -39.000000)" stroke="#000000" stroke-width="2">
+            <g id="晴" transform="translate(100.000000, 40.000000)">
+                <circle id="快晴" fill="#FFFFFF" cx="16" cy="16" r="16"></circle>
+                <path d="M16,0 L16,32" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

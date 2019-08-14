@@ -1,0 +1,24 @@
+.wearher-wind-wrap {
+  position: relative;
+  width: 34px;
+  height: 34px;
+}
+
+.weather {
+  position: absolute;
+  z-index: 1;
+  top: -17px;
+  left: -17px;
+  width: 34px;
+  height: 34px;
+}
+
+.wind {
+  position: absolute;
+  z-index: 0;
+  top: -68px;
+  left: -17px;
+  width: 34px;
+  height: 68px;
+  transform-origin: bottom;
+}
