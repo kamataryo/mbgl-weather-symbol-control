@@ -1,14 +1,12 @@
 import mapboxgl from "mapbox-gl";
 import weathers from "./weather";
 import { windSymbols, windDirections } from "./wind";
-
 import "./style.css";
 
 export class WeatherSymbolControl {
   private container: HTMLDivElement;
 
-  private selectedWeather: keyof typeof weathers = "unknown";
-
+  private selectedWeather?: keyof typeof weathers;
   private currentCenter?: mapboxgl.Point;
   private currentMarker?: mapboxgl.Marker;
   private windMarkerTransformBaseString: string = "";
@@ -23,22 +21,29 @@ export class WeatherSymbolControl {
     indicatorControlGroup.className =
       "weather-indicator mapboxgl-ctrl mapboxgl-ctrl-group";
 
-    Object.keys(weathers).forEach((_key: string) => {
+    Object.keys(weathers).forEach(_key => {
       const key = _key as keyof typeof weathers;
+      const { symbol, subscript } = weathers[key];
+
       const button = document.createElement("button");
       button.className = "weather-select-button";
-      const { symbol, subscript } = weathers[key];
       button.innerHTML = `<img src="${symbol}" class="weather-selector" />`;
       button.innerHTML += subscript
         ? `<span class="subscript">${subscript}</span>`
         : "";
       button.addEventListener("click", () => {
-        const selected = document.querySelector(
-          ".weather-select-button.selected"
-        );
-        selected && selected.classList.remove("selected");
-        button.classList.add("selected");
-        this.selectedWeather = key;
+        if (this.selectedWeather === key) {
+          button.classList.remove("selected");
+          this.selectedWeather = void 0;
+          this.indicate("");
+        } else {
+          const selected = document.querySelector(
+            ".weather-select-button.selected"
+          );
+          selected && selected.classList.remove("selected");
+          button.classList.add("selected");
+          this.selectedWeather = key;
+        }
       });
       buttonControlGroup.appendChild(button);
     });
@@ -57,7 +62,7 @@ export class WeatherSymbolControl {
   }
 
   private onMapClick = (map: mapboxgl.Map) => (e: mapboxgl.MapMouseEvent) => {
-    if (this.currentCenter) {
+    if (this.currentCenter || !this.selectedWeather) {
       this.currentCenter = void 0;
       this.currentMarker = void 0;
       this.windMarkerTransformBaseString = "";
@@ -115,24 +120,29 @@ export class WeatherSymbolControl {
         .getElement()
         .querySelector(".wind");
 
-      const windDirKey = (directionRank < 0
-        ? 16 + directionRank
-        : directionRank) as keyof typeof windDirections;
-      const windDirection = windDirections[windDirKey];
-
       if (windElement) {
         windElement.setAttribute("src", windSymbols[windPower]);
         (windElement as HTMLImageElement).style.transform =
           this.windMarkerTransformBaseString + `rotate(${direction}deg)`;
       }
 
-      const indicator = this.container.querySelector(".weather-indicator");
-      if (indicator) {
+      if (this.selectedWeather) {
         const weather = weathers[this.selectedWeather].name;
-        indicator.innerHTML = `${windDirection}の風 風力${windPower} 天気は${weather}`;
+        const windDirKey = (directionRank < 0
+          ? 16 + directionRank
+          : directionRank) as keyof typeof windDirections;
+        const windDirection = windDirections[windDirKey];
+        this.indicate(`${windDirection}の風 風力${windPower} 天気は${weather}`);
       }
     }
   };
+
+  private indicate(text: string) {
+    const indicator = this.container.querySelector(".weather-indicator");
+    if (indicator) {
+      indicator.innerHTML = text;
+    }
+  }
 
   onRemove() {
     this.container.parentNode &&
