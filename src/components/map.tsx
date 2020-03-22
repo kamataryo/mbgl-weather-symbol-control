@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { BarometricControl } from "../lib/mbgl-barometric-control";
 import { WeatherSymbolControl } from "../lib/mbgl-weather-symbol-control";
 
 export const Map: React.FC = () => {

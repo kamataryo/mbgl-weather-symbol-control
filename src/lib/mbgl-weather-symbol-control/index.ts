@@ -8,6 +8,7 @@ export class WeatherSymbolControl {
 
   private selectedWeather?: keyof typeof weathers;
   private currentCenter?: mapboxgl.Point;
+  private currentLngLat?: mapboxgl.LngLat;
   private currentMarker?: mapboxgl.Marker;
   private windMarkerTransformBaseString: string = "";
 
@@ -68,6 +69,7 @@ export class WeatherSymbolControl {
       this.windMarkerTransformBaseString = "";
     } else {
       this.currentCenter = e.point;
+      this.currentLngLat = e.lngLat;
 
       const weatherElement = document.createElement("img");
       weatherElement.setAttribute("src", weathers[this.selectedWeather].symbol);
@@ -102,6 +104,8 @@ export class WeatherSymbolControl {
   };
 
   private onMapMouseMove = (e: mapboxgl.MapMouseEvent) => {
+    let labelText = "";
+
     if (this.currentCenter && this.currentMarker) {
       const currentCenter = e.point;
       const dx = currentCenter.x - this.currentCenter.x;
@@ -132,9 +136,17 @@ export class WeatherSymbolControl {
           ? 16 + directionRank
           : directionRank) as keyof typeof windDirections;
         const windDirection = windDirections[windDirKey];
-        this.indicate(`${windDirection}の風 風力${windPower} 天気は${weather}`);
+        labelText += `${windDirection}の風 風力${windPower} 天気は${weather}`;
       }
     }
+
+    const latitude =
+      e.lngLat.lat >= 0
+        ? `北緯 ${e.lngLat.lat}`
+        : `南緯 ${Math.abs(e.lngLat.lat)}`;
+    labelText += latitude;
+
+    this.indicate(labelText);
   };
 
   private indicate(text: string) {
